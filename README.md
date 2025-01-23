@@ -6,8 +6,8 @@ step2 : install awscli
 
 step3:  configure the aws and terraform 
 
-step4: make structure
-make stracuture for the  terraform
+step4: 
+make stracuture for the  terraform use ,module for resue of scripts
 
 
 tep4:write atll the scripts for terraform to make in infa. on aws 
