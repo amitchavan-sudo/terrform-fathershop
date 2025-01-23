@@ -53,4 +53,13 @@ module "rds" {
   }
 }
  
+module "s3" {
+  source             = "./modules/s3"
+  region             = "us-east-1"
+  bucket_name        = "wordpress-media-bucket"
+  acl                = "private"
+  force_destroy      = true
+  versioning_enabled = true
+  environment        = "dev"
+}
 
