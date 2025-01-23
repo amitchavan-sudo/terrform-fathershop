@@ -1,0 +1,56 @@
+provider "aws" {
+  region = var.region
+}
+
+module "vpc" {
+  source                = "./modules/vpc"
+  vpc_name              = "wordpress-vpc"
+  cidr_block            = "10.0.0.0/16"
+  public_subnet_cidrs   = ["10.0.1.0/24", "10.0.2.0/24"]
+  private_subnet_cidrs  = ["10.0.3.0/24", "10.0.4.0/24"]
+}
+module "eks" {
+  source           = "./modules/eks"
+  cluster_name     = "my-eks-cluster"
+  vpc_id           = module.vpc.vpc_id                # VPC ID from VPC module
+  subnet_ids       = module.vpc.public_subnets        # Public Subnets from VPC module
+  node_desired_size = 3
+  node_max_size     = 6
+  node_min_size     = 1
+  instance_types    = ["t3.medium"]
+  tags              = {
+    Environment = "dev"
+    Project     = "eks"
+  }
+}
+module "rds" {
+  source                 = "./modules/rds"
+  db_instance_identifier = "wordpress-db"
+  vpc_id                 = module.vpc.vpc_id
+  subnet_ids             = module.vpc.private_subnets
+  allowed_cidr_blocks    =["0.0.0.0/0"]
+
+  db_name                = "wordpress"
+  db_username            = "admin"
+  db_password            = "admin@1234"
+
+  engine                 = "mysql"
+  engine_version         = "8.0.28"
+  allocated_storage      = 20
+  max_allocated_storage  = 100
+  instance_class         = "db.t3.micro"
+
+  backup_retention_period = 7
+  backup_window           = "01:00-02:00"
+  maintenance_window      = "sun:05:00-sun:06:00"
+
+  multi_az               = true
+  deletion_protection    = true
+
+  tags = {
+    Environment = "Production"
+    Application = "WordPress"
+  }
+}
+ 
+
