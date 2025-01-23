@@ -76,4 +76,10 @@ module "elasticache" {
   allowed_cidr_blocks = ["10.0.1.0/24", "10.0.2.0/24"] # Replace with your app subnet CIDRs
   environment       = "dev"
 }
-
+module "letsencrypt" {
+  source                   = "./modules/letsencrypt"
+  domain_name              = "amitchavan.live"
+  subject_alternative_names = ["ns-1881.awsdns-43.co.uk", "ns-178.awsdns-22.com"]
+  route53_zone_id          = "Z123456789ABCDEF"
+  environment              = "dev"
+}
