@@ -63,3 +63,17 @@ module "s3" {
   environment        = "dev"
 }
 
+module "elasticache" {
+  source            = "./modules/elasticache"
+  region            = "us-east-1"
+  cluster_name      = "wordpress-memcached-cluster"
+  node_type         = "cache.t3.micro"
+  num_cache_nodes   = 1
+  parameter_group_name = "default.memcached1.6"
+  port              = 11211
+  subnet_ids        = module.vpc.private_subnets
+  vpc_id            = module.vpc.vpc_id
+  allowed_cidr_blocks = ["10.0.1.0/24", "10.0.2.0/24"] # Replace with your app subnet CIDRs
+  environment       = "dev"
+}
+

@@ -30,3 +30,7 @@ output "rds_endpoint" {
   description = "The endpoint of the RDS instance"
   value       = module.rds.rds_endpoint
 }
+output "elasticache_endpoint" {
+  description = "The primary endpoint of the Elasticache Memcached cluster"
+  value       = module.elasticache.elasticache_endpoint
+}
