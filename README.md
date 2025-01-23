@@ -7,36 +7,10 @@ step2 : install awscli
 step3:  configure the aws and terraform 
 
 step4: make structure
-├── main.tf
-├── modules
-│   ├── eks
-│   │   ├── main.tf
-│   │   ├── outputs.tf
-│   │   └── variables.tf
-│   ├── elasticache
-│   │   ├── main.tf
-│   │   ├── outputs.tf
-│   │   └── variables.tf
-│   ├── letsencrypt
-│   │   ├── main.tf
-│   │   ├── outputs.tf
-│   │   └── variables.tf
-│   ├── rds
-│   │   ├── main.tf
-│   │   ├── outputs.tf
-│   │   └── variables.tf
-│   ├── s3
-│   │   ├── main.tf
-│   │   ├── outputs.tf
-│   │   └── variables.tf
-│   └── vpc
-│       ├── main.tf
-│       ├── outputs.tf
-│       └── variables.tf
-├── outputs.tf
-└── variables.tf
+make stracuture for the  terraform
 
-step4:write atll the scripts for terraform to make in infa. on aws 
+
+tep4:write atll the scripts for terraform to make in infa. on aws 
 
 step5:init terraform
 #terraform init
